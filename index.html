@@ -4,33 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contenedores con Imágenes</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"> <!-- Font Awesome para íconos -->
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+        
+        .container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+        }
+        
+        .background-image {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .background-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .icon-links {
+            position: absolute;
+            bottom: 42%;
+            width: 100%;
+            display: flex;
+            flex-direction: column; /* Cambio para que los elementos se alineen verticalmente */
+            align-items: center;
+        }
+        
+        .icon-links a {
+            width: 100%; /* Hace que cada enlace tome el 100% del ancho disponible */
+            text-align: center; /* Centra el contenido de los enlaces */
+            margin: 10px 0; /* Agrega margen vertical para espacio entre iconos */
+        }
+        
+        .icon-links a img {
+            width: 45px;  /* Ajustado para mejor visibilidad */
+            height: 40px;
+            object-fit: contain;
+        }
+        
+        
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            .background-image {
+                width: 50%;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .background-image {
+                width: 25%;
+            }
+        }
+        
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Carga dinámica de imágenes de fondo
+            const images = [
+                'img/1.gif',
+                'img/2.gif',
+                'img/3.gif',
+                'img/4.gif'
+            ];
+        
+            const divs = document.querySelectorAll('.background-image');
+            divs.forEach((div, index) => {
+                div.style.backgroundImage = images[index];
+            });
+        });
+        
+    </script>
 </head>
 <body>
     <div class="container">
-        <div class="background-image" id="image1"><img src="https://drive.google.com/file/d/1cjuKbwGsrLp7St7_BjVISJAAW2bFNDCm/view?usp=sharing"></div>
+        <div class="background-image" id="image1"><img src="https://i.ibb.co/YXJMS0c/2.gif" alt="1"> </div>
     </div>
     <div class="container">
-        <div class="background-image" id="image2"><img src="https://drive.google.com/file/d/1vfqKh6lXueqPjGLc-3nN_ae6FvN4N04Q/view?usp=sharing"></div>
+        <div class="background-image" id="image2"><img src="https://i.ibb.co/x1SVmHj/1.gif" alt="2"</div>
     </div>
     <div class="container">
-        <div class="background-image" id="image3"><img src="https://drive.google.com/file/d/1cjuKbwGsrLp7St7_BjVISJAAW2bFNDCm/view?usp=sharing"></div>
+        <div class="background-image" id="image3"><img src="https://i.ibb.co/6chBb0c/3.gif" alt="2"></div>
     </div>
     <div class="container">
-        <div class="background-image" id="image4"><img src="https://drive.google.com/file/d/1X-Vm7FEXGir96KugjA7UpO45CyL4YmHs/view?usp=sharing"></div>
+        <div class="background-image" id="image4"><img src="https://i.ibb.co/1Z9SHGS/4.gif" alt="4"></div>
         <div class="icon-links">
-            <a href="https://wa.me/526463077208?text=Hola!%20Gracias%20por%20la%20invitacion!%20Confirmo%20asistencia!" target="_blank"><img src="https://drive.google.com/file/d/1B7N-QC6NQTI_RS9wZVsjKx_rbdyLR2Gs/view?usp=sharing"></a>
-            <a href="https://maps.app.goo.gl/BGxi8Yja2v5gZFmr5" target="_blank"><img src="https://drive.google.com/file/d/1vYafvuVEdTzlt38DlNQ83KwMgHIhbz3s/view?usp=sharing"></a>
-            <a href="https://maps.app.goo.gl/cCdK4Fd5oynbxv8BA" target="_blank"><img src="https://drive.google.com/file/d/1fFN5AEGL9RsUAdw0slNB0qo0N7RaeWxl/view?usp=sharing"></a>
-        </div>
+            <a href="https://wa.me/526463077208?text=Hola!%20Gracias%20por%20la%20invitacion!%20Confirmo%20asistencia!" target="_blank"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADKklEQVR4nO2aTWxNQRTHfxQtKUoUC6HxsSA2EgtrQYOKRoTSjZ34qNKljaQrXwuNRImkCwsaYuH5ShcICxGxsdHPSCkRaSMRi6piZJIjeXmZuW/m3tt5N03/yUle8u793/N/c+bMOec+mMLkxQKgHrgAPAR6gG/AmJj+3C3f6Wt2A1VkBOVAI9AF/AaUp+l7HgMHhSs4ZgMtwOcYztvsE3ASqAglYjswkKKAQusHaidSgF76tgkUUGg3ZOVTxRLgTUARSuw1sDgtETWy3KpE1ic+JEK1pFFVYhsAlsYVUVGicFIRYRYrRbdnwHlVYJfjpFiVUdvmKkIvX28GHFYW63c9NFscCX8BJ4A5wHRgK/AnkJhml9VwLTsOG+7PBRIyVGzjNzoSPbfcXxswxA5ECelyJNlvuX9awP31KKqfcC3FV0f8GM2BhIwD80wO1HuQRMVnlSSCEGJ2mRy46EGgSxcbVgF/Awk5b3LggQfBTouImcDTQCIUcN/kRJ8Hwe2MlDU9JidGPAj0Hlhu4HgWWMiwSciYJ0mngWMtMBpQyE+TkDgO7DHwHC21kC8xiPSsaoWBq62UofUuJtlbYK7hhC+WzgcTzMOUmB74JUq/haanh2WW2u2H4XqdWFbmnTvtMUM7ZxLSmnCZO6ScL8Qy4GZeia9Li82G63RPfhb47vHMc0lLlKhZlD4UTVgjJ/Fey/f517k+r85EMF+yQFIxT4CFxMcij7PMWDSm2RgNWsLHBTscn6H3dOLGysV04Xhd9ogP7jnyN0SR6Pj+kKIYJeF6BdhYRIBuDa46cn4EZhX7RY6lLCTf9Fl1GtggQ4tKGYceAd578DS5LG3NBApJq+ItdxFyKAPOqoh9twVH3MqAw8pil1xFlHn2JSHtlcsG/49NGXBYWV4r6JdNzjiTAadVgfVaWoVIvMxgOFX7ivAZ0IWwa3Ff7OzLgPNKzgnnFGtCh2NreVdeJ5yS4jAtAbrsaErjHxBDBvKvwB3gOLBeWth8zJCpeC5mhzcuVWyDT2othhcygOiU2medwfEoVEpz1ioVbLfwjcqoaURqrZx0dnWGXn8KTBb8A31C/2cT3/wMAAAAAElFTkSuQmCC"></a>
+            <a href="https://maps.app.goo.gl/BGxi8Yja2v5gZFmr5" target="_blank"><img src="https://i.ibb.co/8sJMH3C/iglesia.png" alt="iglesia" border="0"></a>
+            <a href="https://maps.app.goo.gl/cCdK4Fd5oynbxv8BA" target="_blank"><img src="https://i.ibb.co/JyqmKVZ/salud.png" alt="salud" border="0"><</a>
     </div>
 
-    <audio autoplay loop>
-        <source src="sound/Firelight_60.mp3" type="audio/mpeg">
-        Tu navegador no soporta el elemento de audio.
+    <audio>
+        <div class="elfsight-app-fbdd0f78-c219-4a35-8957-d74786b096cc" data-elfsight-app-lazy></div>
     </audio>
 
     <script src="script.js"></script>
+    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
 </body>
 </html>
