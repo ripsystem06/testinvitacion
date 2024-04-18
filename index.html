@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contenedores con Imágenes</title>
     <style>
         body, html {
@@ -10,108 +10,70 @@
             padding: 0;
             height: 100%;
             width: 100%;
+            overflow-x: hidden; /* Evita el desbordamiento horizontal */
         }
-        
+
         .container {
-            position: relative;
+            width: 100%; /* Ocupa el 100% del ancho disponible */
+            max-width: 1468px; /* Máximo ancho de la imagen */
+            margin: 0 auto; /* Centra el contenedor */
             display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 100vh;
+            flex-direction: column; /* Asegura que los elementos estén en una columna */
+            position: relative; /* Necesario para el posicionamiento absoluto de los iconos */
         }
-        
-        .background-image {
-            width: 100%;
-            height: 100%;
-        }
-        
+
         .background-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            width: 100%; /* Hace que la imagen ocupe el 100% del ancho del contenedor */
+            height: auto; /* Mantiene la proporción de la imagen */
         }
-        
+
         .icon-links {
             position: absolute;
-            bottom: 42%;
-            width: 100%;
+            bottom: 50%; /* Posición al fondo del contenedor de la imagen */
+            left: 50%; /* Centra los iconos respecto al contenedor */
+            transform: translateX(-50%); /* Ajuste fino para centrar exactamente */
+            width: auto;
             display: flex;
-            flex-direction: column; /* Cambio para que los elementos se alineen verticalmente */
-            align-items: center;
+            flex-direction: row; /* Cambio para alinear elementos horizontalmente */
+            justify-content: center; /* Centra los elementos horizontalmente */
         }
-        
+
         .icon-links a {
-            width: 100%; /* Hace que cada enlace tome el 100% del ancho disponible */
-            text-align: center; /* Centra el contenido de los enlaces */
-            margin: 10px 0; /* Agrega margen vertical para espacio entre iconos */
+            margin: 10px; /* Agrega espaciado alrededor de los iconos */
         }
-        
+
         .icon-links a img {
-            width: 45px;  /* Ajustado para mejor visibilidad */
-            height: 40px;
+            width: 45px; /* Anchura fija para los iconos */
+            height: 45px; /* Altura fija para mantener proporciones */
             object-fit: contain;
         }
-        
-        
-        @media (min-width: 768px) {
-            .container {
-                flex-direction: row;
-                flex-wrap: wrap;
-            }
-            .background-image {
-                width: 50%;
-            }
-        }
-        
-        @media (min-width: 1024px) {
-            .background-image {
-                width: 25%;
-            }
-        }
-        
     </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Carga dinámica de imágenes de fondo
-            const images = [
-                'img/1.gif',
-                'img/2.gif',
-                'img/3.gif',
-                'img/4.gif'
-            ];
-        
-            const divs = document.querySelectorAll('.background-image');
-            divs.forEach((div, index) => {
-                div.style.backgroundImage = images[index];
-            });
-        });
-        
-    </script>
 </head>
 <body>
     <div class="container">
-        <div class="background-image" id="image1"><img src="https://i.ibb.co/YXJMS0c/2.gif" alt="1"> </div>
+        <div class="background-image" id="image1">
+            <img src="https://i.ibb.co/YXJMS0c/2.gif" alt="Imagen 1" />
+        </div>
     </div>
     <div class="container">
-        <div class="background-image" id="image2"><img src="https://i.ibb.co/x1SVmHj/1.gif" alt="2"</div>
+        <div class="background-image" id="image2">
+            <img src="https://i.ibb.co/x1SVmHj/1.gif" alt="Imagen 2" />
+        </div>
     </div>
     <div class="container">
-        <div class="background-image" id="image3"><img src="https://i.ibb.co/6chBb0c/3.gif" alt="2"></div>
+        <div class="background-image" id="image3">
+            <img src="https://i.ibb.co/6chBb0c/3.gif" alt="Imagen 3" />
+        </div>
     </div>
     <div class="container">
-        <div class="background-image" id="image4"><img src="https://i.ibb.co/1Z9SHGS/4.gif" alt="4"></div>
-        <div class="icon-links">
-            <a href="https://wa.me/526463077208?text=Hola!%20Gracias%20por%20la%20invitacion!%20Confirmo%20asistencia!" target="_blank"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADKklEQVR4nO2aTWxNQRTHfxQtKUoUC6HxsSA2EgtrQYOKRoTSjZ34qNKljaQrXwuNRImkCwsaYuH5ShcICxGxsdHPSCkRaSMRi6piZJIjeXmZuW/m3tt5N03/yUle8u793/N/c+bMOec+mMLkxQKgHrgAPAR6gG/AmJj+3C3f6Wt2A1VkBOVAI9AF/AaUp+l7HgMHhSs4ZgMtwOcYztvsE3ASqAglYjswkKKAQusHaidSgF76tgkUUGg3ZOVTxRLgTUARSuw1sDgtETWy3KpE1ic+JEK1pFFVYhsAlsYVUVGicFIRYRYrRbdnwHlVYJfjpFiVUdvmKkIvX28GHFYW63c9NFscCX8BJ4A5wHRgK/AnkJhml9VwLTsOG+7PBRIyVGzjNzoSPbfcXxswxA5ECelyJNlvuX9awP31KKqfcC3FV0f8GM2BhIwD80wO1HuQRMVnlSSCEGJ2mRy46EGgSxcbVgF/Awk5b3LggQfBTouImcDTQCIUcN/kRJ8Hwe2MlDU9JidGPAj0Hlhu4HgWWMiwSciYJ0mngWMtMBpQyE+TkDgO7DHwHC21kC8xiPSsaoWBq62UofUuJtlbYK7hhC+WzgcTzMOUmB74JUq/haanh2WW2u2H4XqdWFbmnTvtMUM7ZxLSmnCZO6ScL8Qy4GZeia9Li82G63RPfhb47vHMc0lLlKhZlD4UTVgjJ/Fey/f517k+r85EMF+yQFIxT4CFxMcij7PMWDSm2RgNWsLHBTscn6H3dOLGysV04Xhd9ogP7jnyN0SR6Pj+kKIYJeF6BdhYRIBuDa46cn4EZhX7RY6lLCTf9Fl1GtggQ4tKGYceAd578DS5LG3NBApJq+ItdxFyKAPOqoh9twVH3MqAw8pil1xFlHn2JSHtlcsG/49NGXBYWV4r6JdNzjiTAadVgfVaWoVIvMxgOFX7ivAZ0IWwa3Ff7OzLgPNKzgnnFGtCh2NreVdeJ5yS4jAtAbrsaErjHxBDBvKvwB3gOLBeWth8zJCpeC5mhzcuVWyDT2othhcygOiU2medwfEoVEpz1ioVbLfwjcqoaURqrZx0dnWGXn8KTBb8A31C/2cT3/wMAAAAAElFTkSuQmCC"></a>
-            <a href="https://maps.app.goo.gl/BGxi8Yja2v5gZFmr5" target="_blank"><img src="https://i.ibb.co/8sJMH3C/iglesia.png" alt="iglesia" border="0"></a>
-            <a href="https://maps.app.goo.gl/cCdK4Fd5oynbxv8BA" target="_blank"><img src="https://i.ibb.co/JyqmKVZ/salud.png" alt="salud" border="0"><</a>
+        <div class="background-image" id="image4">
+            <img src="https://i.ibb.co/1Z9SHGS/4.gif" alt="Imagen 4">
+            <div class="icon-links">
+                <a href="https://wa.me/526463077208?text=Hola!%20Gracias%20por%20la%20invitacion!%20Confirmo%20asistencia!" target="_blank"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADKklEQVR4nO2aTWxNQRTHfxQtKUoUC6HxsSA2EgtrQYOKRoTSjZ34qNKljaQrXwuNRImkCwsaYuH5ShcICxGxsdHPSCkRaSMRi6piZJIjeXmZuW/m3tt5N03/yUle8u793/N/c+bMOec+mMLkxQKgHrgAPAR6gG/AmJj+3C3f6Wt2A1VkBOVAI9AF/AaUp+l7HgMHhSs4ZgMtwOcYztvsE3ASqAglYjswkKKAQusHaidSgF76tgkUUGg3ZOVTxRLgTUARSuw1sDgtETWy3KpE1ic+JEK1pFFVYhsAlsYVUVGicFIRYRYrRbdnwHlVYJfjpFiVUdvmKkIvX28GHFYW63c9NFscCX8BJ4A5wHRgK/AnkJhml9VwLTsOG+7PBRIyVGzjNzoSPbfcXxswxA5ECelyJNlvuX9awP31KKqfcC3FV0f8GM2BhIwD80wO1HuQRMVnlSSCEGJ2mRy46EGgSxcbVgF/Awk5b3LggQfBTouImcDTQCIUcN/kRJ8Hwe2MlDU9JidGPAj0Hlhu4HgWWMiwSciYJ0mngWMtMBpQyE+TkDgO7DHwHC21kC8xiPSsaoWBq62UofUuJtlbYK7hhC+WzgcTzMOUmB74JUq/haanh2WW2u2H4XqdWFbmnTvtMUM7ZxLSmnCZO6ScL8Qy4GZeia9Li82G63RPfhb47vHMc0lLlKhZlD4UTVgjJ/Fey/f517k+r85EMF+yQFIxT4CFxMcij7PMWDSm2RgNWsLHBTscn6H3dOLGysV04Xhd9ogP7jnyN0SR6Pj+kKIYJeF6BdhYRIBuDa46cn4EZhX7RY6lLCTf9Fl1GtggQ4tKGYceAd578DS5LG3NBApJq+ItdxFyKAPOqoh9twVH3MqAw8pil1xFlHn2JSHtlcsG/49NGXBYWV4r6JdNzjiTAadVgfVaWoVIvMxgOFX7ivAZ0IWwa3Ff7OzLgPNKzgnnFGtCh2NreVdeJ5yS4jAtAbrsaErjHxBDBvKvwB3gOLBeWth8zJCpeC5mhzcuVWyDT2othhcygOiU2medwfEoVEpz1ioVbLfwjcqoaURqrZx0dnWGXn8KTBb8A31C/2cT3/wMAAAAAElFTkSuQmCC"></a>
+                <a  href="https://maps.app.goo.gl/BGxi8Yja2v5gZFmr5" target="_blank"><img src="https://i.ibb.co/8sJMH3C/iglesia.png" alt="iglesia"></a>
+                <a href="https://maps.app.goo.gl/BGxi8Yja2v5gZFmr5" target="_blank"><img src="https://i.ibb.co/JyqmKVZ/salud.png" alt="salud"></a>
+            </div>
+        </div>
     </div>
-
-    <audio>
-        <div class="elfsight-app-fbdd0f78-c219-4a35-8957-d74786b096cc" data-elfsight-app-lazy></div>
-    </audio>
-
-    <script src="script.js"></script>
-    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
 </body>
 </html>
