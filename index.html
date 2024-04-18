@@ -1,86 +1,139 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contenedores con Imágenes</title>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            overflow-x: hidden; /* Evita el desbordamiento horizontal */
-        }
+      body,
+      html {
+        height: 100%; /* Fija la altura de la página */
+        overflow: hidden; /* Elimina la capacidad de desplazamiento inicial */
+      }
 
-        .container {
-            width: 100%; /* Ocupa el 100% del ancho disponible */
-            max-width: 1468px; /* Máximo ancho de la imagen */
-            margin: 0 auto; /* Centra el contenedor */
-            display: flex;
-            flex-direction: column; /* Asegura que los elementos estén en una columna */
-            position: relative; /* Necesario para el posicionamiento absoluto de los iconos */
-        }
+      .container {
+        width: 100%;
+        max-width: 1468px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        visibility: hidden; /* Inicialmente oculto */
+        opacity: 0; /* Inicialmente transparente */
+        transform: translateY(20px); /* Inicia un poco hacia abajo */
+        transition: visibility 0s linear 1s, opacity 1.5s ease-in-out,
+          transform 1.5s ease-in-out; /* Transiciones suavizadas y prolongadas */
+      }
 
-        .background-image img {
-            width: 100%; /* Hace que la imagen ocupe el 100% del ancho del contenedor */
-            height: auto; /* Mantiene la proporción de la imagen */
-        }
+      .container.show {
+        visibility: visible; /* Hace el contenedor visible */
+        opacity: 1; /* Hace el contenedor totalmente opaco */
+        transform: translateY(
+          0
+        ); /* Mueve el contenedor a su posición original */
+        transition: visibility 0s linear 0s, opacity 1.5s ease-in-out,
+          transform 1.5s ease-in-out; /* Ajusta las transiciones para la aparición */
+      }
 
-        .icon-links {
-            position: absolute;
-            bottom: 50%; /* Posición al fondo del contenedor de la imagen */
-            left: 50%; /* Centra los iconos respecto al contenedor */
-            transform: translateX(-50%); /* Ajuste fino para centrar exactamente */
-            width: auto;
-            display: flex;
-            flex-direction: row; /* Cambio para alinear elementos horizontalmente */
-            justify-content: center; /* Centra los elementos horizontalmente */
-        }
+      .background-image img {
+        width: 100%;
+        height: auto;
+      }
 
-        .icon-links a {
-            margin: 10px; /* Agrega espaciado alrededor de los iconos */
-        }
+      .icon-links {
+        position: absolute;
+        bottom: 12%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
 
-        .icon-links a img {
-            width: 45px; /* Anchura fija para los iconos */
-            height: 45px; /* Altura fija para mantener proporciones */
-            object-fit: contain;
-        }
+      .icon-links a {
+        margin: 10px;
+      }
+
+      .icon-links a img {
+        width: 45px;
+        height: 45px;
+        object-fit: contain;
+      }
+
+      .cover-image {
+        width: 100%;
+        height: 100vh; /* Asegura que la imagen de cubierta ocupe toda la vista de la pantalla */
+        object-fit: cover; /* Asegura que la imagen cubra toda el área asignada sin deformarse */
+      }
     </style>
-</head>
-<body>
-    <div class="container">
-        <div class="background-image" id="image1">
-            <img src="https://i.ibb.co/YXJMS0c/2.gif" alt="Imagen 1" />
+  </head>
+  <body>
+    <img
+      class="cover-image"
+      src="https://eventobonito.com/wp-content/uploads/2024/02/icono-sobre-600x1067.png"
+      alt="Cubierta Interactiva"
+    />
+
+    <div class="container" id="mainContainer">
+      <div class="background-image" id="image1">
+        <img src="https://i.ibb.co/YXJMS0c/2.gif" alt="Imagen 1" />
+      </div>
+      <div class="background-image" id="image2">
+        <img src="https://i.ibb.co/x1SVmHj/1.gif" alt="Imagen 2" />
+      </div>
+      <div class="background-image" id="image3">
+        <img src="https://i.ibb.co/6chBb0c/3.gif" alt="Imagen 3" />
+      </div>
+      <div class="background-image" id="image4">
+        <img src="https://i.ibb.co/1Z9SHGS/4.gif" alt="Imagen 4" />
+        <div class="icon-links">
+          <a
+            href="https://wa.me/526463077208?text=Hola!%20Gracias%20por%20la%20invitacion!%20Confirmo%20asistencia!"
+            target="_blank"
+          >
+            <img
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADKklEQVR4nO2aTWxNQRTHfxQtKUoUC6HxsSA2EgtrQYOKRoTSjZ34qNKljaQrXwuNRImkCwsaYuH5ShcICxGxsdHPSCkRaSMRi6piZJIjeXmZuW/m3tt5N03/yUle8u793/N/c+bMOec+mMLkxQKgHrgAPAR6gG/AmJj+3C3f6Wt2A1VkBOVAI9AF/AaUp+l7HgMHhSs4ZgMtwOcYztvsE3ASqAglYjswkKKAQusHaidSgF76tgkUUGg3ZOVTxRLgTUARSuw1sDgtETWy3KpE1ic+JEK1pFFVYhsAlsYVUVGicFIRYRYrRbdnwHlVYJfjpFiVUdvmKkIvX28GHFYW63c9NFscCX8BJ4A5wHRgK/AnkJhml9VwLTsOG+7PBRIyVGzjNzoSPbfcXxswxA5ECelyJNlvuX9awP31KKqfcC3FV0f8GM2BhIwD80wO1HuQRMVnlSSCEGJ2mRy46EGgSxcbVgF/Awk5b3LggQfBTouImcDTQCIUcN/kRJ8Hwe2MlDU9JidGPAj0Hlhu4HgWWMiwSciYJ0mngWMtMBpQyE+TkDgO7DHwHC21kC8xiPSsaoWBq62UofUuJtlbYK7hhC+WzgcTzMOUmB74JUq/haanh2WW2u2H4XqdWFbmnTvtMUM7ZxLSmnCZO6ScL8Qy4GZeia9Li82G63RPfhb47vHMc0lLlKhZlD4UTVgjJ/Fey/f517k+r85EMF+yQFIxT4CFxMcij7PMWDSm2RgNWsLHBTscn6H3dOLGysV04Xhd9ogP7jnyN0SR6Pj+kKIYJeF6BdhYRIBuDa46cn4EZhX7RY6lLCTf9Fl1GtggQ4tKGYceAd578DS5LG3NBApJq+ItdxFyKAPOqoh9twVH3MqAw8pil1xFlHn2JSHtlcsG/49NGXBYWV4r6JdNzjiTAadVgfVaWoVIvMxgOFX7ivAZ0IWwa3Ff7OzLgPNKzgnnFGtCh2NreVdeJ5yS4jAtAbrsaErjHxBDBvKvwB3gOLBeWth8zJCpeC5mhzcuVWyDT2othhcygOiU2medwfEoVEpz1ioVbLfwjcqoaURqrZx0dnWGXn8KTBb8A31C/2cT3/wMAAAAAElFTkSuQmCC"
+              alt="WhatsApp"
+          /></a>
+          <a href="https://maps.app.goo.gl/BGxi8Yja2v5gZFmr5" target="_blank"
+            ><img src="https://i.ibb.co/8sJMH3C/iglesia.png" alt="Iglesia"
+          /></a>
+          <a href="https://maps.app.goo.gl/BGxi8Yja2v5gZFmr5" target="_blank"
+            ><img src="https://i.ibb.co/JyqmKVZ/salud.png" alt="Salud"
+          /></a>
         </div>
-    </div>
-    <div class="container">
-        <div class="background-image" id="image2">
-            <img src="https://i.ibb.co/x1SVmHj/1.gif" alt="Imagen 2" />
-        </div>
-    </div>
-    <div class="container">
-        <div class="background-image" id="image3">
-            <img src="https://i.ibb.co/6chBb0c/3.gif" alt="Imagen 3" />
-        </div>
-    </div>
-    <div class="container">
-        <div class="background-image" id="image4">
-            <img src="https://i.ibb.co/1Z9SHGS/4.gif" alt="Imagen 4">
-            <div class="icon-links">
-                <a href="https://wa.me/526463077208?text=Hola!%20Gracias%20por%20la%20invitacion!%20Confirmo%20asistencia!" target="_blank"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADKklEQVR4nO2aTWxNQRTHfxQtKUoUC6HxsSA2EgtrQYOKRoTSjZ34qNKljaQrXwuNRImkCwsaYuH5ShcICxGxsdHPSCkRaSMRi6piZJIjeXmZuW/m3tt5N03/yUle8u793/N/c+bMOec+mMLkxQKgHrgAPAR6gG/AmJj+3C3f6Wt2A1VkBOVAI9AF/AaUp+l7HgMHhSs4ZgMtwOcYztvsE3ASqAglYjswkKKAQusHaidSgF76tgkUUGg3ZOVTxRLgTUARSuw1sDgtETWy3KpE1ic+JEK1pFFVYhsAlsYVUVGicFIRYRYrRbdnwHlVYJfjpFiVUdvmKkIvX28GHFYW63c9NFscCX8BJ4A5wHRgK/AnkJhml9VwLTsOG+7PBRIyVGzjNzoSPbfcXxswxA5ECelyJNlvuX9awP31KKqfcC3FV0f8GM2BhIwD80wO1HuQRMVnlSSCEGJ2mRy46EGgSxcbVgF/Awk5b3LggQfBTouImcDTQCIUcN/kRJ8Hwe2MlDU9JidGPAj0Hlhu4HgWWMiwSciYJ0mngWMtMBpQyE+TkDgO7DHwHC21kC8xiPSsaoWBq62UofUuJtlbYK7hhC+WzgcTzMOUmB74JUq/haanh2WW2u2H4XqdWFbmnTvtMUM7ZxLSmnCZO6ScL8Qy4GZeia9Li82G63RPfhb47vHMc0lLlKhZlD4UTVgjJ/Fey/f517k+r85EMF+yQFIxT4CFxMcij7PMWDSm2RgNWsLHBTscn6H3dOLGysV04Xhd9ogP7jnyN0SR6Pj+kKIYJeF6BdhYRIBuDa46cn4EZhX7RY6lLCTf9Fl1GtggQ4tKGYceAd578DS5LG3NBApJq+ItdxFyKAPOqoh9twVH3MqAw8pil1xFlHn2JSHtlcsG/49NGXBYWV4r6JdNzjiTAadVgfVaWoVIvMxgOFX7ivAZ0IWwa3Ff7OzLgPNKzgnnFGtCh2NreVdeJ5yS4jAtAbrsaErjHxBDBvKvwB3gOLBeWth8zJCpeC5mhzcuVWyDT2othhcygOiU2medwfEoVEpz1ioVbLfwjcqoaURqrZx0dnWGXn8KTBb8A31C/2cT3/wMAAAAAElFTkSuQmCC"></a>
-                <a  href="https://maps.app.goo.gl/BGxi8Yja2v5gZFmr5" target="_blank"><img src="https://i.ibb.co/8sJMH3C/iglesia.png" alt="iglesia"></a>
-                <a href="https://maps.app.goo.gl/BGxi8Yja2v5gZFmr5" target="_blank"><img src="https://i.ibb.co/JyqmKVZ/salud.png" alt="salud"></a>
-            </div>
-        </div>
+      </div>
     </div>
 
     <audio>
-        <div class="elfsight-app-fbdd0f78-c219-4a35-8957-d74786b096cc" data-elfsight-app-lazy></div>
+      <div
+        class="elfsight-app-fbdd0f78-c219-4a35-8957-d74786b096cc"
+        data-elfsight-app-lazy
+      ></div>
     </audio>
 
-    
-    <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
-</body>
+    <script
+      src="https://static.elfsight.com/platform/platform.js"
+      data-use-service-core
+      defer
+    ></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const coverImage = document.querySelector(".cover-image");
+        const container = document.getElementById("mainContainer");
+
+        coverImage.addEventListener("click", function () {
+          document.body.style.overflow = "auto"; // Habilita el desplazamiento en el cuerpo de la página
+          container.classList.toggle("show"); // Alternar la clase 'show'
+          if (container.classList.contains("show")) {
+            setTimeout(() => {
+              container.scrollIntoView({ behavior: "smooth" });
+            }, 1500);
+          }
+        });
+      });
+    </script>
+  </body>
 </html>
